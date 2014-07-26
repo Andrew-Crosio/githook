@@ -62,7 +62,11 @@ def commit():
         print 'No payload found'
         return "Missing form variable 'payload'"
 
-    ref = payload["ref"]
+    try:
+        ref = payload["ref"]
+    except KeyError:
+        return 'Ignoring, test payload'
+
     refend = ref.rsplit("/", 1)[1]
 
     owner = payload["repository"]["owner"]["name"]
