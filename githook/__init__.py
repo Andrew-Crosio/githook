@@ -56,12 +56,11 @@ def commit():
         payload = request.json
     except Exception:
         payload = request.form.get('payload')
+        payload = json.loads(payload)
 
     if not payload:
         print 'No payload found'
         return "Missing form variable 'payload'"
-
-    payload = json.loads(payload)
 
     ref = payload["ref"]
     refend = ref.rsplit("/", 1)[1]
